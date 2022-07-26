@@ -13,18 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('Front.home')->name('home');
-//});
+Route::get('/admin/dashboard', function () {
+    return view('Dashboard.dashboard');
+});
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::group(['middleware' => 'can:user_auth'],function (){
+        Route::get('/dashboard',[\App\Http\Controllers\UserDashboardController::class,'dashboard'])->name('dashboard');
+    });
+
 });
 
 Route::get('/',[\App\Http\Controllers\FrontController::class,'home'])->name('home');
