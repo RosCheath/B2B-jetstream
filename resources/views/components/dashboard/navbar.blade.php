@@ -1,837 +1,446 @@
-<div>
-    <!-- Navbar -->
-    <header class="relative bg-white dark:bg-darker">
-        <div class="flex items-center justify-between p-2 border-b dark:border-primary-darker">
-            <!-- Mobile menu button -->
-            <button
-                @click="isMobileMainMenuOpen = !isMobileMainMenuOpen"
-                class="p-1 transition-colors duration-200 rounded-md text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark md:hidden focus:outline-none focus:ring"
-            >
-                <span class="sr-only">Open main manu</span>
-                <span aria-hidden="true">
-                  <svg
-                      class="w-8 h-8"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                </span>
-            </button>
-
-            <!-- Brand -->
-            <a
-                href="index.html"
-                class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light"
-            >
-                K-WD
-            </a>
-
-            <!-- Mobile sub menu button -->
-            <button
-                @click="isMobileSubMenuOpen = !isMobileSubMenuOpen"
-                class="p-1 transition-colors duration-200 rounded-md text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark md:hidden focus:outline-none focus:ring"
-            >
-                <span class="sr-only">Open sub manu</span>
-                <span aria-hidden="true">
-                  <svg
-                      class="w-8 h-8"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                  >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                    />
-                  </svg>
-                </span>
-            </button>
-
-            <!-- Desktop Right buttons -->
-            <nav aria-label="Secondary" class="hidden space-x-2 md:flex md:items-center">
-                <!-- Toggle dark theme button -->
-                <button aria-hidden="true" class="relative focus:outline-none" x-cloak @click="toggleTheme">
-                    <div
-                        class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-lighter"
-                    ></div>
-                    <div
-                        class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-150 transform scale-110 rounded-full shadow-sm"
-                        :class="{ 'translate-x-0 -translate-y-px  bg-white text-primary-dark': !isDark, 'translate-x-6 text-primary-100 bg-primary-darker': isDark }"
-                    >
-                        <svg
-                            x-show="!isDark"
-                            class="w-4 h-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                            />
-                        </svg>
-                        <svg
-                            x-show="isDark"
-                            class="w-4 h-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-                            />
-                        </svg>
-                    </div>
-                </button>
-
-                <!-- Notification button -->
-                <button
-                    @click="openNotificationsPanel"
-                    class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker"
-                >
-                    <span class="sr-only">Open Notification panel</span>
-                    <svg
-                        class="w-7 h-7"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                        />
-                    </svg>
-                </button>
-
-                <!-- Search button -->
-                <button
-                    @click="openSearchPanel"
-                    class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker"
-                >
-                    <span class="sr-only">Open search panel</span>
-                    <svg
-                        class="w-7 h-7"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                    </svg>
-                </button>
-
-                <!-- Settings button -->
-                <button
-                    @click="openSettingsPanel"
-                    class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker"
-                >
-                    <span class="sr-only">Open settings panel</span>
-                    <svg
-                        class="w-7 h-7"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                        />
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                    </svg>
-                </button>
-
-                <!-- User avatar button -->
-                <div class="relative" x-data="{ open: false }">
-                    <button
-                        @click="open = !open; $nextTick(() => { if(open){ $refs.userMenu.focus() } })"
-                        type="button"
-                        aria-haspopup="true"
-                        :aria-expanded="open ? 'true' : 'false'"
-                        class="transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100"
-                    >
-                        <span class="sr-only">User menu</span>
-                        <img class="w-10 h-10 rounded-full" src="{{Auth::user()->profile_photo_url}}" alt="{{Auth::user()->name}}" />
-                    </button>
-
-                    <!-- User dropdown menu -->
-                    <div
-                        x-show="open"
-                        x-ref="userMenu"
-                        x-transition:enter="transition-all transform ease-out"
-                        x-transition:enter-start="translate-y-1/2 opacity-0"
-                        x-transition:enter-end="translate-y-0 opacity-100"
-                        x-transition:leave="transition-all transform ease-in"
-                        x-transition:leave-start="translate-y-0 opacity-100"
-                        x-transition:leave-end="translate-y-1/2 opacity-0"
-                        @click.away="open = false"
-                        @keydown.escape="open = false"
-                        class="absolute right-0 w-48 py-1 bg-white rounded-md shadow-lg top-12 ring-1 ring-black ring-opacity-5 dark:bg-dark focus:outline-none"
-                        tabindex="-1"
-                        role="menu"
-                        aria-orientation="vertical"
-                        aria-label="User menu"
-                    >
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
-                        >
-                            Your Profile
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
-                        >
-                            Settings
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
-                        >
-                            Logout
-                        </a>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Mobile sub menu -->
-            <nav
-                x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500"
-                x-transition:enter-start="-translate-y-full opacity-0"
-                x-transition:enter-end="translate-y-0 opacity-100"
-                x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500"
-                x-transition:leave-start="translate-y-0 opacity-100"
-                x-transition:leave-end="-translate-y-full opacity-0"
-                x-show="isMobileSubMenuOpen"
-                @click.away="isMobileSubMenuOpen = false"
-                class="absolute flex items-center p-4 bg-white rounded-md shadow-lg dark:bg-darker top-16 inset-x-4 md:hidden"
-                aria-label="Secondary"
-            >
-                <div class="space-x-2">
-                    <!-- Toggle dark theme button -->
-                    <button aria-hidden="true" class="relative focus:outline-none" x-cloak @click="toggleTheme">
-                        <div
-                            class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-lighter"
-                        ></div>
-                        <div
-                            class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 transform scale-110 rounded-full shadow-sm"
-                            :class="{ 'translate-x-0 -translate-y-px  bg-white text-primary-dark': !isDark, 'translate-x-6 text-primary-100 bg-primary-darker': isDark }"
-                        >
-                            <svg
-                                x-show="!isDark"
-                                class="w-4 h-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                                />
-                            </svg>
-                            <svg
-                                x-show="isDark"
-                                class="w-4 h-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-                                />
-                            </svg>
+<!--start top header-->
+<header class="top-header">
+    <nav class="navbar navbar-expand">
+        <div class="mobile-toggle-icon d-xl-none">
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="top-navbar d-none d-xl-block">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="app-emailbox.html">Email</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:;">Projects</a>
+                </li>
+                <li class="nav-item d-none d-xxl-block">
+                    <a class="nav-link" href="javascript:;">Events</a>
+                </li>
+                <li class="nav-item d-none d-xxl-block">
+                    <a class="nav-link" href="app-to-do.html">Todo</a>
+                </li>
+            </ul>
+        </div>
+        <div class="search-toggle-icon d-xl-none ms-auto">
+            <i class="bi bi-search"></i>
+        </div>
+        <form class="searchbar d-none d-xl-flex ms-auto">
+            <div class="position-absolute top-50 translate-middle-y search-icon ms-3"><i class="bi bi-search"></i></div>
+            <input class="form-control" type="text" placeholder="Type here to search">
+            <div class="position-absolute top-50 translate-middle-y d-block d-xl-none search-close-icon"><i class="bi bi-x-lg"></i></div>
+        </form>
+        <div class="top-navbar-right ms-3">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item dropdown dropdown-large">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                        <div class="user-setting d-flex align-items-center gap-1">
+                            <img src="assets/images/avatars/avatar-1.png" class="user-img" alt="">
+                            <div class="user-name d-none d-sm-block">Jhon Deo</div>
                         </div>
-                    </button>
-
-                    <!-- Notification button -->
-                    <button
-                        @click="openNotificationsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })"
-                        class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker"
-                    >
-                        <span class="sr-only">Open notifications panel</span>
-                        <svg
-                            class="w-7 h-7"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                            />
-                        </svg>
-                    </button>
-
-                    <!-- Search button -->
-                    <button
-                        @click="openSearchPanel(); $nextTick(() => { $refs.searchInput.focus(); setTimeout(() => {isMobileSubMenuOpen= false}, 100) })"
-                        class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker"
-                    >
-                        <span class="sr-only">Open search panel</span>
-                        <svg
-                            class="w-7 h-7"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
-                    </button>
-
-                    <!-- Settings button -->
-                    <button
-                        @click="openSettingsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })"
-                        class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker"
-                    >
-                        <span class="sr-only">Open settings panel</span>
-                        <svg
-                            class="w-7 h-7"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                            />
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- User avatar button -->
-                <div class="relative ml-auto" x-data="{ open: false }">
-                    <button
-                        @click="open = !open"
-                        type="button"
-                        aria-haspopup="true"
-                        :aria-expanded="open ? 'true' : 'false'"
-                        class="block transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100"
-                    >
-                        <span class="sr-only">User menu</span>
-                        <img class="w-10 h-10 rounded-full" src="build/images/avatar.jpg" alt="Ahmed Kamel" />
-                    </button>
-
-                    <!-- User dropdown menu -->
-                    <div
-                        x-show="open"
-                        x-transition:enter="transition-all transform ease-out"
-                        x-transition:enter-start="translate-y-1/2 opacity-0"
-                        x-transition:enter-end="translate-y-0 opacity-100"
-                        x-transition:leave="transition-all transform ease-in"
-                        x-transition:leave-start="translate-y-0 opacity-100"
-                        x-transition:leave-end="translate-y-1/2 opacity-0"
-                        @click.away="open = false"
-                        class="absolute right-0 w-48 py-1 origin-top-right bg-white rounded-md shadow-lg top-12 ring-1 ring-black ring-opacity-5 dark:bg-dark"
-                        role="menu"
-                        aria-orientation="vertical"
-                        aria-label="User menu"
-                    >
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
-                        >
-                            Your Profile
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
-                        >
-                            Settings
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary"
-                        >
-                            Logout
-                        </a>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-1.png" alt="" class="rounded-circle" width="60" height="60">
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 dropdown-user-name">Jhon Deo</h6>
+                                        <small class="mb-0 dropdown-user-designation text-secondary">HR Manager</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="pages-user-profile.html">
+                                <div class="d-flex align-items-center">
+                                    <div class="setting-icon"><i class="bi bi-person-fill"></i></div>
+                                    <div class="setting-text ms-3"><span>Profile</span></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="setting-icon"><i class="bi bi-gear-fill"></i></div>
+                                    <div class="setting-text ms-3"><span>Setting</span></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="index2.html">
+                                <div class="d-flex align-items-center">
+                                    <div class="setting-icon"><i class="bi bi-speedometer"></i></div>
+                                    <div class="setting-text ms-3"><span>Dashboard</span></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="setting-icon"><i class="bi bi-piggy-bank-fill"></i></div>
+                                    <div class="setting-text ms-3"><span>Earnings</span></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="setting-icon"><i class="bi bi-cloud-arrow-down-fill"></i></div>
+                                    <div class="setting-text ms-3"><span>Downloads</span></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="authentication-signup-with-header-footer.html">
+                                <div class="d-flex align-items-center">
+                                    <div class="setting-icon"><i class="bi bi-lock-fill"></i></div>
+                                    <div class="setting-text ms-3"><span>Logout</span></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown dropdown-large">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                        <div class="projects">
+                            <i class="bi bi-grid-3x3-gap-fill"></i>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <div class="row row-cols-3 gx-2">
+                            <div class="col">
+                                <a href="ecommerce-orders.html">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-white bg-primary bg-gradient">
+                                            <i class="bi bi-cart-plus-fill"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Orders</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="javascript:;">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-white bg-danger bg-gradient">
+                                            <i class="bi bi-people-fill"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Users</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="ecommerce-products-grid.html">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-white bg-success bg-gradient">
+                                            <i class="bi bi-bank2"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Products</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="component-media-object.html">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-white bg-orange bg-gradient">
+                                            <i class="bi bi-collection-play-fill"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Media</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="pages-user-profile.html">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-white bg-purple bg-gradient">
+                                            <i class="bi bi-person-circle"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Account</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="javascript:;">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-dark bg-info bg-gradient">
+                                            <i class="bi bi-file-earmark-text-fill"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Docs</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="ecommerce-orders-detail.html">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-white bg-pink bg-gradient">
+                                            <i class="bi bi-credit-card-fill"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Payment</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="javascript:;">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-white bg-bronze bg-gradient">
+                                            <i class="bi bi-calendar-check-fill"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Events</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="javascript:;">
+                                    <div class="apps p-2 radius-10 text-center">
+                                        <div class="apps-icon-box mb-1 text-dark bg-warning bg-gradient">
+                                            <i class="bi bi-book-half"></i>
+                                        </div>
+                                        <p class="mb-0 apps-name">Story</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div><!--end row-->
                     </div>
-                </div>
-            </nav>
+                </li>
+                <li class="nav-item dropdown dropdown-large">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                        <div class="messages">
+                            <span class="notify-badge">5</span>
+                            <i class="bi bi-messenger"></i>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end p-0">
+                        <div class="p-2 border-bottom m-2">
+                            <h5 class="h5 mb-0">Messages</h5>
+                        </div>
+                        <div class="header-message-list p-2">
+                            <div class="dropdown-item bg-light radius-10 mb-1">
+                                <form class="dropdown-searchbar position-relative">
+                                    <div class="position-absolute top-50 start-0 translate-middle-y px-3 search-icon"><i class="bi bi-search"></i></div>
+                                    <input class="form-control" type="search" placeholder="Search Messages">
+                                </form>
+                            </div>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-1.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Amelio Joly <span class="msg-time float-end text-secondary">1 m</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">The standard chunk of lorem...</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-2.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Althea Cabardo <span class="msg-time float-end text-secondary">7 m</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">Many desktop publishing</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-3.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Katherine Pechon <span class="msg-time float-end text-secondary">2 h</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">Making this the first true</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-4.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Peter Costanzo <span class="msg-time float-end text-secondary">3 h</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">It was popularised in the 1960</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-5.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Thomas Wheeler <span class="msg-time float-end text-secondary">1 d</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">If you are going to use a passage</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-6.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Johnny Seitz <span class="msg-time float-end text-secondary">2 w</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">All the Lorem Ipsum generators</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-1.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Amelio Joly <span class="msg-time float-end text-secondary">1 m</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">The standard chunk of lorem...</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-2.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Althea Cabardo <span class="msg-time float-end text-secondary">7 m</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">Many desktop publishing</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/avatars/avatar-3.png" alt="" class="rounded-circle" width="52" height="52">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Katherine Pechon <span class="msg-time float-end text-secondary">2 h</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">Making this the first true</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="p-2">
+                            <div><hr class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <div class="text-center">View All Messages</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown dropdown-large d-none d-sm-block">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                        <div class="notifications">
+                            <span class="notify-badge">8</span>
+                            <i class="bi bi-bell-fill"></i>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end p-0">
+                        <div class="p-2 border-bottom m-2">
+                            <h5 class="h5 mb-0">Notifications</h5>
+                        </div>
+                        <div class="header-notifications-list p-2">
+                            <div class="dropdown-item bg-light radius-10 mb-1">
+                                <form class="dropdown-searchbar position-relative">
+                                    <div class="position-absolute top-50 start-0 translate-middle-y px-3 search-icon"><i class="bi bi-search"></i></div>
+                                    <input class="form-control" type="search" placeholder="Search Messages">
+                                </form>
+                            </div>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-basket2-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">New Orders <span class="msg-time float-end text-secondary">1 m</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">You have recived new orders</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-people-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">New Customers <span class="msg-time float-end text-secondary">7 m</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">5 new user registered</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-file-earmark-bar-graph-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">24 PDF File <span class="msg-time float-end text-secondary">2 h</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">The pdf files generated</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-collection-play-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Time Response  <span class="msg-time float-end text-secondary">3 h</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">5.1 min avarage time response</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-cursor-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">New Product Approved  <span class="msg-time float-end text-secondary">1 d</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">Your new product has approved</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-gift-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">New Comments <span class="msg-time float-end text-secondary">2 w</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">New customer comments recived</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-droplet-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">New 24 authors<span class="msg-time float-end text-secondary">1 m</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">24 new authors joined last week</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-mic-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Your item is shipped <span class="msg-time float-end text-secondary">7 m</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">Successfully shipped your item</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-lightbulb-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">Defense Alerts <span class="msg-time float-end text-secondary">2 h</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">45% less alerts last 4 weeks</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-bookmark-heart-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">4 New Sign Up <span class="msg-time float-end text-secondary">2 w</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">New 4 user registartions</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="notification-box"><i class="bi bi-briefcase-fill"></i></div>
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-0 dropdown-msg-user">All Documents Uploaded <span class="msg-time float-end text-secondary">1 mo</span></h6>
+                                        <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">Sussessfully uploaded all files</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="p-2">
+                            <div><hr class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <div class="text-center">View All Notifications</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <!-- Mobile main manu -->
-        <div
-            class="border-b md:hidden dark:border-primary-darker"
-            x-show="isMobileMainMenuOpen"
-            @click.away="isMobileMainMenuOpen = false"
-        >
-            <nav aria-label="Main" class="px-2 py-4 space-y-2">
-                <!-- Dashboards links -->
-                <div x-data="{ isActive: true, open: true}">
-                    <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                    <span aria-hidden="true">
-                      <svg
-                          class="w-5 h-5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                        />
-                      </svg>
-                    </span>
-                        <span class="ml-2 text-sm"> Dashboards </span>
-                        <span class="ml-auto" aria-hidden="true">
-                      <!-- active class 'rotate-180' -->
-                      <svg
-                          class="w-4 h-4 transition-transform transform"
-                          :class="{ 'rotate-180': open }"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </span>
-                    </a>
-                    <div role="menu" x-show="open" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="index.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-700 transition-colors duration-200 rounded-md dark:text-light dark:hover:text-light hover:text-gray-700"
-                        >
-                            Default
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Project Mangement (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            E-Commerce (soon)
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Components links -->
-                <div x-data="{ isActive: false, open: false }">
-                    <!-- active classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                    <span aria-hidden="true">
-                      <svg
-                          class="w-5 h-5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                        />
-                      </svg>
-                    </span>
-                        <span class="ml-2 text-sm"> Components </span>
-                        <span aria-hidden="true" class="ml-auto">
-                      <!-- active class 'rotate-180' -->
-                      <svg
-                          class="w-4 h-4 transition-transform transform"
-                          :class="{ 'rotate-180': open }"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </span>
-                    </a>
-                    <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Alerts (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Buttons (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Cards (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Dropdowns (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Forms (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Lists (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Modals (soon)
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Pages links -->
-                <div x-data="{ isActive: false, open: false }">
-                    <!-- active classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                    <span aria-hidden="true">
-                      <svg
-                          class="w-5 h-5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                        />
-                      </svg>
-                    </span>
-                        <span class="ml-2 text-sm"> Pages </span>
-                        <span aria-hidden="true" class="ml-auto">
-                      <!-- active class 'rotate-180' -->
-                      <svg
-                          class="w-4 h-4 transition-transform transform"
-                          :class="{ 'rotate-180': open }"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </span>
-                    </a>
-                    <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Pages">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="pages/blank.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Blank
-                        </a>
-                        <a
-                            href="pages/404.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            404
-                        </a>
-                        <a
-                            href="pages/500.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            500
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Profile (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Pricing (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Kanban (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Feed (soon)
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Authentication links -->
-                <div x-data="{ isActive: false, open: false}">
-                    <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                    <span aria-hidden="true">
-                      <svg
-                          class="w-5 h-5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
-                    </span>
-                        <span class="ml-2 text-sm"> Authentication </span>
-                        <span aria-hidden="true" class="ml-auto">
-                      <!-- active class 'rotate-180' -->
-                      <svg
-                          class="w-4 h-4 transition-transform transform"
-                          :class="{ 'rotate-180': open }"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </span>
-                    </a>
-                    <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="auth/register.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Register
-                        </a>
-                        <a
-                            href="auth/login.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Login
-                        </a>
-                        <a
-                            href="auth/forgot-password.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Forgot Password
-                        </a>
-                        <a
-                            href="auth/reset-password.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Reset Password
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Layouts links -->
-                <div x-data="{ isActive: false, open: false}">
-                    <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                    <span aria-hidden="true">
-                      <svg
-                          class="w-5 h-5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                        />
-                      </svg>
-                    </span>
-                        <span class="ml-2 text-sm"> Layouts </span>
-                        <span aria-hidden="true" class="ml-auto">
-                      <!-- active class 'rotate-180' -->
-                      <svg
-                          class="w-4 h-4 transition-transform transform"
-                          :class="{ 'rotate-180': open }"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                      >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </span>
-                    </a>
-                    <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Layouts">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="layouts/two-columns-sidebar.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Two Columns Sidebar
-                        </a>
-                        <a
-                            href="layouts/mini-plus-one-columns-sidebar.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Mini + One Columns Sidebar
-                        </a>
-                        <a
-                            href="layouts/mini-column-sidebar.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Mini Column Sidebar
-                        </a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-</div>
+    </nav>
+</header>
+<!--end top header-->

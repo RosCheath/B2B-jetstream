@@ -1,4 +1,4 @@
-<div>
+
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
@@ -62,4 +62,3 @@
         </div>
     </div>
     <!-- Topbar End -->
-</div>

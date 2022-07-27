@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin/dashboard', function () {
-    return view('Dashboard.dashboard');
-});
+Route::get('/admin/dashboard',[\App\Http\Controllers\Admin\DashboardController::class,'AdminDashboard'])->name('admin.dashboard')->middleware('auth');
+Route::get('/admin/Products/List',[\App\Http\Controllers\Admin\ProductController::class,'product'])->name('admin.product')->middleware('auth');
+Route::get('/User/Dashboard/Product',[\App\Http\Controllers\User\ProductController::class,'product'])->name('user.product')->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

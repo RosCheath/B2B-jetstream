@@ -1,449 +1,256 @@
-<div>
-    <!-- Sidebar -->
-    <aside class="flex-shrink-0 hidden w-64 bg-white border-r dark:border-primary-darker dark:bg-darker md:block">
-        <div class="flex flex-col h-full">
-            <!-- Sidebar links -->
-            <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
-                <!-- Dashboards links -->
-                <div x-data="{ isActive: true, open: true}">
-                    <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                  <span aria-hidden="true">
-                    <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                      />
-                    </svg>
-                  </span>
-                        <span class="ml-2 text-sm"> Dashboards </span>
-                        <span class="ml-auto" aria-hidden="true">
-                    <!-- active class 'rotate-180' -->
-                    <svg
-                        class="w-4 h-4 transition-transform transform"
-                        :class="{ 'rotate-180': open }"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
-                    </a>
-                    <div role="menu" x-show="open" class="mt-2 space-y-2 px-7" aria-label="Dashboards">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="index.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-700 transition-colors duration-200 rounded-md dark:text-light dark:hover:text-light hover:text-gray-700"
-                        >
-                            Default
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Project Mangement (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            E-Commerce (soon)
-                        </a>
+<!--start sidebar -->
+<aside class="sidebar-wrapper">
+    <div class="iconmenu">
+        <div class="nav-toggle-box">
+            <div class="nav-toggle-icon"><i class="bi bi-list"></i></div>
+        </div>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboards">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-dashboards" type="button"><i class="bi bi-house-door-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Application">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-application" type="button"><i class="bi bi-grid-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Widgets">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-widgets" type="button"><i class="bi bi-briefcase-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="eCommerce">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-ecommerce" type="button"><i class="bi bi-bag-check-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Components">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-components" type="button"><i class="bi bi-bookmark-star-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Forms">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-forms" type="button"><i class="bi bi-file-earmark-break-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Tables">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-tables" type="button"><i class="bi bi-file-earmark-spreadsheet-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Authentication">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-authentication" type="button"><i class="bi bi-lock-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Icons">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-icons" type="button"><i class="bi bi-cloud-arrow-down-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Content">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-content" type="button"><i class="bi bi-cone-striped"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Charts">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-charts" type="button"><i class="bi bi-pie-chart-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Maps">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-maps" type="button"><i class="bi bi-pin-map-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Pages">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-pages" type="button"><i class="bi bi-award-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Charts">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-charts" type="button"><i class="bi bi-pie-chart-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Maps">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-maps" type="button"><i class="bi bi-pin-map-fill"></i></button>
+            </li>
+            <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Pages">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-pages" type="button"><i class="bi bi-award-fill"></i></button>
+            </li>
+        </ul>
+    </div>
+    <div class="textmenu">
+        <div class="brand-logo">
+            <img src="assets/images/brand-logo-2.png" width="140" alt=""/>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade" id="pills-dashboards">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Dashboards</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
                     </div>
+                    <a href="{{route('admin.dashboard')}}" class="list-group-item"><i class="bi bi-cart-plus"></i>e-Commerce</a>
+                    <a href="#" class="list-group-item"><i class="bi bi-wallet"></i>Sales (soon)</a>
+                    <a href="#" class="list-group-item"><i class="bi bi-bar-chart-line"></i>Analytics Sales (soon)</a>
+                    <a href="#" class="list-group-item"><i class="bi bi-archive"></i>Project Management Sales (soon)</a>
+                    <a href="#" class="list-group-item"><i class="bi bi-cast"></i>CMS Dashboard Sales (soon)</a>
                 </div>
-
-                <!-- Components links -->
-                <div x-data="{ isActive: false, open: false }">
-                    <!-- active classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                  <span aria-hidden="true">
-                    <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                      />
-                    </svg>
-                  </span>
-                        <span class="ml-2 text-sm"> Components </span>
-                        <span aria-hidden="true" class="ml-auto">
-                    <!-- active class 'rotate-180' -->
-                    <svg
-                        class="w-4 h-4 transition-transform transform"
-                        :class="{ 'rotate-180': open }"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
-                    </a>
-                    <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Alerts (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Buttons (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Cards (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Dropdowns (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Forms (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Lists (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Modals (soon)
-                        </a>
+            </div>
+            <div class="tab-pane fade" id="pills-application">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Application</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
                     </div>
+                    <a href="app-emailbox.html" class="list-group-item"><i class="bi bi-envelope"></i>Email</a>
+                    <a href="app-chat-box.html" class="list-group-item"><i class="bi bi-chat-left-text"></i>Chat Box</a>
+                    <a href="app-file-manager.html" class="list-group-item"><i class="bi bi-archive"></i>File Manager</a>
+                    <a href="app-to-do.html" class="list-group-item"><i class="bi bi-check2-square"></i>Todo List</a>
+                    <a href="app-invoice.html" class="list-group-item"><i class="bi bi-receipt"></i>Invoice</a>
                 </div>
-
-                <!-- Pages links -->
-                <div x-data="{ isActive: false, open: false }">
-                    <!-- active classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                  <span aria-hidden="true">
-                    <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </span>
-                        <span class="ml-2 text-sm"> Pages </span>
-                        <span aria-hidden="true" class="ml-auto">
-                    <!-- active class 'rotate-180' -->
-                    <svg
-                        class="w-4 h-4 transition-transform transform"
-                        :class="{ 'rotate-180': open }"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
-                    </a>
-                    <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Pages">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="pages/blank.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Blank
-                        </a>
-                        <a
-                            href="pages/404.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            404
-                        </a>
-                        <a
-                            href="pages/500.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            500
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Profile (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Pricing (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Kanban (soon)
-                        </a>
-                        <a
-                            href="#"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Feed (soon)
-                        </a>
+            </div>
+            <div class="tab-pane fade" id="pills-widgets">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Widgets</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
                     </div>
+                    <a href="widgets-static-widgets.html" class="list-group-item"><i class="bi bi-box"></i>Static Widgets</a>
+                    <a href="widgets-data-widgets.html" class="list-group-item"><i class="bi bi-bar-chart"></i>Data Widgets</a>
                 </div>
-
-                <!-- Authentication links -->
-                <div x-data="{ isActive: false, open: false}">
-                    <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                  <span aria-hidden="true">
-                    <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  </span>
-                        <span class="ml-2 text-sm"> Authentication </span>
-                        <span aria-hidden="true" class="ml-auto">
-                    <!-- active class 'rotate-180' -->
-                    <svg
-                        class="w-4 h-4 transition-transform transform"
-                        :class="{ 'rotate-180': open }"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
-                    </a>
-                    <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="auth/register.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Register
-                        </a>
-                        <a
-                            href="auth/login.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Login
-                        </a>
-                        <a
-                            href="auth/forgot-password.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Forgot Password
-                        </a>
-                        <a
-                            href="auth/reset-password.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
-                        >
-                            Reset Password
-                        </a>
+            </div>
+            <div class="tab-pane fade" id="pills-ecommerce">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">eCommerce</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
                     </div>
+                    <a href="{{route('admin.product')}}" class="list-group-item"><i class="bi bi-box-seam"></i>Products List</a>
+                    <a href="ecommerce-products-grid.html" class="list-group-item"><i class="bi bi-box-seam"></i>Products Grid</a>
+                    <a href="ecommerce-products-categories.html" class="list-group-item"><i class="bi bi-card-text"></i>Products Categories</a>
+                    <a href="ecommerce-orders.html" class="list-group-item"><i class="bi bi-plus-square"></i>Orders</a>
+                    <a href="ecommerce-orders-detail.html" class="list-group-item"><i class="bi bi-handbag"></i>Orders Detail</a>
+                    <a href="ecommerce-add-new-product.html" class="list-group-item"><i class="bi bi-handbag"></i>Add New Product</a>
+                    <a href="ecommerce-add-new-product-2.html" class="list-group-item"><i class="bi bi-handbag"></i>Add New Product 2</a>
+                    <a href="ecommerce-transactions.html" class="list-group-item"><i class="bi bi-handbag"></i>Transactions</a>
                 </div>
-
-                <!-- Layouts links -->
-                <div x-data="{ isActive: false, open: false}">
-                    <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-                    <a
-                        href="#"
-                        @click="$event.preventDefault(); open = !open"
-                        class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
-                        :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
-                        role="button"
-                        aria-haspopup="true"
-                        :aria-expanded="(open || isActive) ? 'true' : 'false'"
-                    >
-                  <span aria-hidden="true">
-                    <svg
-                        class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                      />
-                    </svg>
-                  </span>
-                        <span class="ml-2 text-sm"> Layouts </span>
-                        <span aria-hidden="true" class="ml-auto">
-                    <!-- active class 'rotate-180' -->
-                    <svg
-                        class="w-4 h-4 transition-transform transform"
-                        :class="{ 'rotate-180': open }"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
-                    </a>
-                    <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Layouts">
-                        <!-- active & hover classes 'text-gray-700 dark:text-light' -->
-                        <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
-                        <a
-                            href="layouts/two-columns-sidebar.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Two Columns Sidebar
-                        </a>
-                        <a
-                            href="layouts/mini-plus-one-columns-sidebar.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Mini + One Columns Sidebar
-                        </a>
-                        <a
-                            href="layouts/mini-column-sidebar.html"
-                            role="menuitem"
-                            class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
-                        >
-                            Mini Column Sidebar
-                        </a>
+            </div>
+            <div class="tab-pane fade" id="pills-components">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Components</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
                     </div>
+                    <a href="component-alerts.html" class="list-group-item"><i class="bi bi-bell"></i>Alerts</a>
+                    <a href="component-accordions.html" class="list-group-item"><i class="bi bi-arrows-collapse"></i>Accordions</a>
+                    <a href="component-badges.html" class="list-group-item"><i class="bi bi-badge-8k"></i>Badges</a>
+                    <a href="component-buttons.html" class="list-group-item"><i class="bi bi-menu-button"></i>Buttons</a>
+                    <a href="component-cards.html" class="list-group-item"><i class="bi bi-card-list"></i>Cards</a>
+                    <a href="component-carousels.html" class="list-group-item"><i class="bi bi-card-image"></i>Carousels</a>
+                    <a href="component-list-groups.html" class="list-group-item"><i class="bi bi-list-ol"></i>List Groups</a>
+                    <a href="component-media-object.html" class="list-group-item"><i class="bi bi-collection"></i>Media Objects</a>
+                    <a href="component-modals.html" class="list-group-item"><i class="bi bi-binoculars"></i>Modals</a>
+                    <a href="component-navs-tabs.html" class="list-group-item"><i class="bi bi-segmented-nav"></i>Navs & Tabs</a>
+                    <a href="component-navbar.html" class="list-group-item"><i class="bi bi-list"></i>Navbars</a>
+                    <a href="component-paginations.html" class="list-group-item"><i class="bi bi-arrow-down-up"></i>Pagination</a>
+                    <a href="component-popovers-tooltips.html" class="list-group-item"><i class="bi bi-droplet"></i>Popovers & Tooltips</a>
+                    <a href="component-progress-bars.html" class="list-group-item"><i class="bi bi-eject"></i>Progress</a>
+                    <a href="component-spinners.html" class="list-group-item"><i class="bi bi-gear-wide"></i>Spinners</a>
+                    <a href="component-notifications.html" class="list-group-item"><i class="bi bi-app-indicator"></i>Notifications</a>
+                    <a href="component-avtars-chips.html" class="list-group-item"><i class="bi bi-person-badge"></i>Avatrs & Chips</a>
+                    <a href="component-typography.html" class="list-group-item"><i class="bi bi-person-badge"></i>Typography</a>
                 </div>
-            </nav>
-
-            <!-- Sidebar footer -->
-            <div class="flex-shrink-0 px-2 py-4 space-y-2">
-                <button
-                    @click="openSettingsPanel"
-                    type="button"
-                    class="flex items-center justify-center w-full px-4 py-2 text-sm text-white rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring focus:ring-primary-dark focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark"
-                >
-                <span aria-hidden="true">
-                  <svg
-                      class="w-4 h-4 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                  >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                    />
-                  </svg>
-                </span>
-                    <span>Customize</span>
-                </button>
+            </div>
+            <div class="tab-pane fade" id="pills-forms">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Forms</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
+                    </div>
+                    <a href="form-elements.html" class="list-group-item"><i class="bi bi-award"></i>Form Elements</a>
+                    <a href="form-input-group.html" class="list-group-item"><i class="bi bi-back"></i>Input Groups</a>
+                    <a href="form-layouts.html" class="list-group-item"><i class="bi bi-bookmark-check"></i>Form Layouts</a>
+                    <a href="form-validations.html" class="list-group-item"><i class="bi bi-broadcast-pin"></i>Form Validations</a>
+                    <a href="form-file-upload.html" class="list-group-item"><i class="bi bi-cloud-upload"></i>File Upload</a>
+                    <a href="form-date-time-pickes.html" class="list-group-item"><i class="bi bi-calendar-date"></i>Date Pickers</a>
+                    <a href="form-select2.html" class="list-group-item"><i class="bi bi-check2-circle"></i>Select2</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-tables">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Tables</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
+                    </div>
+                    <a href="table-basic-table.html" class="list-group-item"><i class="bi bi-table"></i>Basic Tables</a>
+                    <a href="table-advance-tables.html" class="list-group-item"><i class="bi bi-basket3"></i>Advance Tables</a>
+                    <a href="table-datatable.html" class="list-group-item"><i class="bi bi-graph-up"></i>Data Tables</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-authentication">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Authentication</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
+                    </div>
+                    <a href="authentication-signin.html" class="list-group-item"><i class="bi bi-easel"></i>Sign In</a>
+                    <a href="authentication-signin-with-header-footer.html" class="list-group-item d-flex align-items-center"><i class="bi bi-eject"></i>Sign In with Header & Footer</a>
+                    <a href="authentication-signup.html" class="list-group-item"><i class="bi bi-emoji-heart-eyes"></i>Sign Up</a>
+                    <a href="authentication-signup-with-header-footer.html" class="list-group-item d-flex align-items-center"><i class="bi bi-eye"></i>Sign Up with Header & Footer</a>
+                    <a href="authentication-forgot-password.html" class="list-group-item"><i class="bi bi-file-earmark-code"></i>Forgot Password</a>
+                    <a href="authentication-reset-password.html" class="list-group-item"><i class="bi bi-gem"></i>Reset Password</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-icons">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Icons</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
+                    </div>
+                    <a href="icons-line-icons.html" class="list-group-item"><i class="bi bi-brightness-low"></i>Line Icons</a>
+                    <a href="icons-boxicons.html" class="list-group-item"><i class="bi bi-chat"></i>Boxicons</a>
+                    <a href="icons-feather-icons.html" class="list-group-item"><i class="bi bi-droplet"></i>Feather Icons</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-charts">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Charts</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
+                    </div>
+                    <a href="charts-chartjs.html" class="list-group-item"><i class="bi bi-bar-chart"></i>Chart JS</a>
+                    <a href="charts-apex-chart.html" class="list-group-item"><i class="bi bi-pie-chart"></i>Apex Chart</a>
+                    <a href="charts-highcharts.html" class="list-group-item"><i class="bi bi-graph-up"></i>Highcharts</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-maps">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Maps</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
+                    </div>
+                    <a href="map-google-maps.html" class="list-group-item"><i class="bi bi-geo-alt"></i>Google Map</a>
+                    <a href="map-vector-maps.html" class="list-group-item"><i class="bi bi-geo"></i>Vector Map</a>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-pages">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-0">Pages</h5>
+                        </div>
+                        <small class="mb-0">Some placeholder content</small>
+                    </div>
+                    <a href="pages-user-profile.html" class="list-group-item"><i class="bi bi-alarm"></i>User Profile</a>
+                    <a href="pages-timeline.html" class="list-group-item"><i class="bi bi-archive"></i>Timeline</a>
+                    <a href="pages-faq.html" class="list-group-item"><i class="bi bi-question-diamond"></i>FAQ</a>
+                    <a href="pages-pricing-tables.html" class="list-group-item"><i class="bi bi-tags"></i>Pricing</a>
+                    <a href="pages-errors-404-error.html" class="list-group-item"><i class="bi bi-bug"></i>404 Error</a>
+                    <a href="pages-errors-500-error.html" class="list-group-item"><i class="bi bi-diagram-2"></i>500 Error</a>
+                    <a href="pages-errors-coming-soon.html" class="list-group-item"><i class="bi bi-egg-fried"></i>Coming Soon</a>
+                    <a href="pages-blank-page.html" class="list-group-item"><i class="bi bi-flag"></i>Blank Page</a>
+                </div>
             </div>
         </div>
-    </aside>
-</div>
+    </div>
+</aside>
+<!--start sidebar -->

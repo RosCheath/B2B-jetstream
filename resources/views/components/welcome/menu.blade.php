@@ -1,4 +1,4 @@
-<div>
+
     <!-- Navbar Start -->
     <div class="container-fluid">
         <div class="row border-top px-xl-5">
@@ -125,7 +125,7 @@
                                                     @endcan
 
                                                     @can('admin_auth')
-                                                        <x-jet-dropdown-link href="{{ route('dashboard') }}">
+                                                        <x-jet-dropdown-link href="{{ route('admin.dashboard') }}">
                                                             {{ __('Dashboard') }}
                                                         </x-jet-dropdown-link>
                                                         <div class="border-t border-gray-100"></div>
@@ -161,4 +161,4 @@
         </div>
     </div>
     <!-- Navbar End -->
-</div>
+
