@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function product(){
+    public function index(){
         return view('UserDashboard.ProductGrid');
+    }
+
+    public function create(){
+
+        return view('UserDashboard.create');
     }
 }
