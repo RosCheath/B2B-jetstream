@@ -17,4 +17,8 @@ class Product extends Model
         'description',
         'image'
     ];
+
+    public function team(){
+        return $this->belongsTo(Team::class);
+    }
 }

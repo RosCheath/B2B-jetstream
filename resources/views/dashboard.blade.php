@@ -14,8 +14,8 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="">
-                                <p class="mb-1">Total Orders</p>
-                                <h4 class="mb-0 text-tiffany">248</h4>
+                                <p class="mb-1">Total Product</p>
+                                <h4 class="mb-0 text-tiffany">{{$productTotal}}</h4>
                             </div>
                             <div class="ms-auto widget-icon bg-tiffany text-white">
                                 <i class="bi bi-bag-check-fill"></i>

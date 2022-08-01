@@ -33,52 +33,30 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="pill" href="#success-pills-contact" role="tab" aria-selected="false">
-                        <div class="d-flex align-items-center">
-                            <div class="tab-icon"><i class='bx bx-microphone font-18 me-1'></i>
-                            </div>
-                            <div class="tab-title">Contact</div>
-                        </div>
-                    </a>
-                </li>
             </ul>
 
         </div>
     </div>
-
     <div class="tab-content">
         <div class="tab-pane fade show active" id="pills-product-grid" role="tabpanel">
             <div class="bg-white py-2">
                 <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                    <div class="d-flex align-items-center">
+                        <h5>Grid Product</h5>
+                        <form class="ms-auto position-relative">
+                            <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
+                            <input class="form-control ps-5" type="text" placeholder="search">
+                        </form>
+                    </div>
                     <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                        <div class="group relative">
-                            <div
-                                class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                                <img
-                                    src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                                    alt="Front of men&#039;s Basic Tee in black."
-                                    class="w-full h-full object-center object-cover lg:w-full lg:h-full">
-                            </div>
-                            <div class="mt-4 flex justify-between">
-                                <div>
-                                    <h3 class="text-sm text-gray-700">
-                                        <a href="#">
-                                            <span aria-hidden="true" class="absolute inset-0"></span>
-                                            Basic Tee
-                                        </a>
-                                    </h3>
-                                    <p class="mt-1 text-sm text-gray-500">Black</p>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">$35</p>
-                            </div>
-                        </div>
 
+                       @foreach($product as $dataProduct)
+                           @can('product_view',$dataProduct)
                         <div class="group relative">
                             <div
                                 class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                                 <img
-                                    src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                                    src="{{$dataProduct->image}}"
                                     alt="Front of men&#039;s Basic Tee in black."
                                     class="w-full h-full object-center object-cover lg:w-full lg:h-full">
                             </div>
@@ -87,101 +65,20 @@
                                     <h3 class="text-sm text-gray-700">
                                         <a href="#">
                                             <span aria-hidden="true" class="absolute inset-0"></span>
-                                            Basic Tee
+                                            {{$dataProduct->name}}
                                         </a>
                                     </h3>
-                                    <p class="mt-1 text-sm text-gray-500">Black</p>
+                                    <p class="mt-1 text-sm text-gray-500">{{$dataProduct->id}}</p>
                                 </div>
-                                <p class="text-sm font-medium text-gray-900">$35</p>
+                                <p class="text-sm font-medium text-gray-900">${{$dataProduct->price}}</p>
                             </div>
                         </div>
-                        <div class="group relative">
-                            <div
-                                class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                                <img
-                                    src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                                    alt="Front of men&#039;s Basic Tee in black."
-                                    class="w-full h-full object-center object-cover lg:w-full lg:h-full">
-                            </div>
-                            <div class="mt-4 flex justify-between">
-                                <div>
-                                    <h3 class="text-sm text-gray-700">
-                                        <a href="#">
-                                            <span aria-hidden="true" class="absolute inset-0"></span>
-                                            Basic Tee
-                                        </a>
-                                    </h3>
-                                    <p class="mt-1 text-sm text-gray-500">Black</p>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">$35</p>
-                            </div>
-                        </div>
-                        <div class="group relative">
-                            <div
-                                class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                                <img
-                                    src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                                    alt="Front of men&#039;s Basic Tee in black."
-                                    class="w-full h-full object-center object-cover lg:w-full lg:h-full">
-                            </div>
-                            <div class="mt-4 flex justify-between">
-                                <div>
-                                    <h3 class="text-sm text-gray-700">
-                                        <a href="#">
-                                            <span aria-hidden="true" class="absolute inset-0"></span>
-                                            Basic Tee
-                                        </a>
-                                    </h3>
-                                    <p class="mt-1 text-sm text-gray-500">Black</p>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">$35</p>
-                            </div>
-                        </div>
-                        <div class="group relative">
-                            <div
-                                class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                                <img
-                                    src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                                    alt="Front of men&#039;s Basic Tee in black."
-                                    class="w-full h-full object-center object-cover lg:w-full lg:h-full">
-                            </div>
-                            <div class="mt-4 flex justify-between">
-                                <div>
-                                    <h3 class="text-sm text-gray-700">
-                                        <a href="#">
-                                            <span aria-hidden="true" class="absolute inset-0"></span>
-                                            Basic Tee
-                                        </a>
-                                    </h3>
-                                    <p class="mt-1 text-sm text-gray-500">Black</p>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">$35</p>
-                            </div>
-                        </div>
-                        <div class="group relative">
-                            <div
-                                class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                                <img
-                                    src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                                    alt="Front of men&#039;s Basic Tee in black."
-                                    class="w-full h-full object-center object-cover lg:w-full lg:h-full">
-                            </div>
-                            <div class="mt-4 flex justify-between">
-                                <div>
-                                    <h3 class="text-sm text-gray-700">
-                                        <a href="#">
-                                            <span aria-hidden="true" class="absolute inset-0"></span>
-                                            Basic Tee
-                                        </a>
-                                    </h3>
-                                    <p class="mt-1 text-sm text-gray-500">Black</p>
-                                </div>
-                                <p class="text-sm font-medium text-gray-900">$35</p>
-                            </div>
-                        </div>
+                            @endcan
+                        @endforeach
 
                         <!-- More products... -->
                     </div>
+
                 </div>
             </div>
         </div>
@@ -189,7 +86,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <h5 class="mb-0">Order Table</h5>
+                        <h5>List Table</h5>
                         <form class="ms-auto position-relative">
                             <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
                             <input class="form-control ps-5" type="text" placeholder="search">
@@ -208,13 +105,16 @@
                                 <th>Shipping</th>
                             </tr>
                             </thead>
-                            <tbody><tr>
-                                <td>Sport Shoes</td>
-                                <td><img src="assets/images/products/01.png" class="product-img-2" alt="product img"></td>
+                            <tbody>
+                            @foreach($product as $listProduct)
+                                @can('product_view',$listProduct)
+                            <tr>
+                                <td>{{$listProduct->name}}</td>
+                                <td><img src="{{$listProduct->image}}" class="product-img-2" alt="product img"></td>
                                 <td>#9405822</td>
                                 <td><span class="badge bg-light-success text-success w-100">Paid</span></td>
-                                <td>$1250.00</td>
-                                <td>03 Feb 2020</td>
+                                <td>${{$listProduct->price}}</td>
+                                <td>{{$listProduct->created_at}}</td>
                                 <td><div class="table-actions d-flex align-items-center gap-3 fs-6">
                                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
                                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
@@ -222,74 +122,8 @@
                                     </div>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td>Man Headcap</td>
-                                <td><img src="assets/images/products/02.png" class="product-img-2" alt="product img"></td>
-                                <td>#8304620</td>
-                                <td><span class="badge bg-light-warning text-warning w-100">Pending</span></td>
-                                <td>$1500.00</td>
-                                <td>05 Feb 2020</td>
-                                <td><div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
-                                        <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                        <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                                    </div></td>
-                            </tr>
-
-                            <tr>
-                                <td>Sunglass</td>
-                                <td><img src="assets/images/products/03.png" class="product-img-2" alt="product img"></td>
-                                <td>#4736890</td>
-                                <td><span class="badge bg-light-danger text-danger w-100">Failed</span></td>
-                                <td>$1400.00</td>
-                                <td>06 Feb 2020</td>
-                                <td><div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
-                                        <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                        <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                                    </div></td>
-                            </tr>
-
-                            <tr>
-                                <td>Shirt Formal</td>
-                                <td><img src="assets/images/products/04.png" class="product-img-2" alt="product img"></td>
-                                <td>#8543765</td>
-                                <td><span class="badge bg-light-success text-success w-100">Paid</span></td>
-                                <td>$1200.00</td>
-                                <td>14 Feb 2020</td>
-                                <td><div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
-                                        <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                        <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                                    </div></td>
-                            </tr>
-                            <tr>
-                                <td>Black Coat Pant</td>
-                                <td><img src="assets/images/products/06.png" class="product-img-2" alt="product img"></td>
-                                <td>#9629240</td>
-                                <td><span class="badge bg-light-warning text-warning w-100">Pending</span></td>
-                                <td>$1500.00</td>
-                                <td>18 Feb 2020</td>
-                                <td><div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
-                                        <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                        <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                                    </div></td>
-                            </tr>
-                            <tr>
-                                <td>Heals</td>
-                                <td><img src="assets/images/products/05.png" class="product-img-2" alt="product img"></td>
-                                <td>#8506790</td>
-                                <td><span class="badge bg-light-danger text-danger w-100">Failed</span></td>
-                                <td>$1800.00</td>
-                                <td>21 Feb 2020</td>
-                                <td><div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
-                                        <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                        <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                                    </div></td>
-                            </tr>
+                                @endcan
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
