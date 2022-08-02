@@ -10,11 +10,11 @@ class ProductController extends Controller
 {
     public function index(){
         $product = Product::get();
-        return view('UserDashboard.ProductGrid',compact('product'));
+        return view('UserDashboard.product.ProductGrid',compact('product'));
     }
 
     public function create(){
 
-        return view('UserDashboard.create');
+        return view('UserDashboard.product.create');
     }
 }
