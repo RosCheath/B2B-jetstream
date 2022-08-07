@@ -22,7 +22,8 @@ class ProductFactory extends Factory
             'team_id' => Team::factory(),
             'description' => fake()->text(),
             'price' => fake()->randomNumber(3),
-            'image' => fake()->imageUrl,
+            'image' => 'https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+
         ];
     }
 }

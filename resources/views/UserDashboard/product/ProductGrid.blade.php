@@ -49,7 +49,7 @@
                         </form>
                     </div>
                     <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-
+                    @if($product->count())
                        @foreach($product as $dataProduct)
                            @can('product_view',$dataProduct)
                         <div class="group relative">
@@ -75,6 +75,9 @@
                         </div>
                             @endcan
                         @endforeach
+                        @else
+                            <h1>No product</h1>
+                        @endif
 
                         <!-- More products... -->
                     </div>
