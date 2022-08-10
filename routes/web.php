@@ -18,6 +18,7 @@ Route::get('/admin/Products/List',[\App\Http\Controllers\Admin\ProductController
 Route::resource('product',\App\Http\Controllers\User\ProductController::class)->middleware('auth');
 Route::resource('order',\App\Http\Controllers\User\OrderController::class)->middleware('auth');
 Route::resource('add_to_cart',\App\Http\Controllers\User\AddToCartController::class)->middleware('auth');
+Route::resource('favorite',\App\Http\Controllers\User\FavoriteController::class)->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

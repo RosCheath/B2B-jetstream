@@ -51,7 +51,7 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
-                <a
+                <a href="{{route('favorite.index')}}"
                         class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">1</span>
